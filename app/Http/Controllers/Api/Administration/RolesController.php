@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Administration;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role; // Menggunakan model Role bawaan Spatie
+use App\Models\Administrator\Role;
 
 class RolesController extends Controller
 {

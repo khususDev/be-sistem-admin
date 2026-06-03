@@ -44,11 +44,10 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'role_id' => 'required', // Sesuaikan jika ingin divalidasi exists:roles,id
+            'role_id' => 'required',
             'is_active' => 'boolean'
         ]);
 
-        // Simpan data, password otomatis dienkripsi dengan Hash::make
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

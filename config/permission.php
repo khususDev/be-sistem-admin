@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Administrator\User;
 use Spatie\Permission\DefaultTeamResolver;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -28,7 +29,8 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role' => Role::class,
+        'role' => App\Models\Administrator\Role::class,
+        'user' => 'App\Models\Administrator\User', // Tambahkan model User jika diperlukan
 
     ],
 

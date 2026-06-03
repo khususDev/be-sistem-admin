@@ -67,12 +67,21 @@ class PermissionController extends Controller
 
     public function destroy($id)
     {
-        $permission = Permission::findOrFail($id);
-        $permission->delete();
+        try {
+            $permission = Permission::findOrFail($id);
+            $permission->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Data deleted successfully!'
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Data deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Delete error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete data',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

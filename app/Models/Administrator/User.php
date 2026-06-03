@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Administrator\Role;
 use Laravel\Sanctum\HasApiTokens;
-// Ganti 'spatie' menjadi 'Spatie' (Huruf S besar)
 use Spatie\Permission\Traits\HasRoles;
 
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -26,6 +25,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    protected $guard_name = 'web';
     protected $fillable = [
         'name',
         'email',
@@ -45,8 +46,8 @@ class User extends Authenticatable
 
     public function role()
     {
-        // Ganti tujuan relasinya ke model Role milik Spatie
-        return $this->belongsTo(\Spatie\Permission\Models\Role::class, 'role_id');
+        // Arahkan ke model Role kustom buatan Anda sendiri
+        return $this->belongsTo(\App\Models\Administrator\Role::class, 'role_id');
     }
 
 

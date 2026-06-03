@@ -32,11 +32,19 @@ class PermissionSeeder extends Seeder
 
         // 3. Simpan ke database
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web', // samakan dengan guard di model User
+            ]);
         }
 
+        $superAdmin = Role::firstOrCreate([
+            'name' => 'Superadmin',
+            'guard_name' => 'web', // samakan juga
+        ]);
+
         // 4. Buat Role Super Admin (jika belum ada)
-        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin']);
+        $superAdmin = Role::firstOrCreate(['name' => 'Superadmin']);
 
         // 5. Berikan SEMUA hak akses ke Super Admin
         $superAdmin->givePermissionTo(Permission::all());
